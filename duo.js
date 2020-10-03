@@ -23,6 +23,7 @@ function freeShop(type,brand,image,price,size,color){
 	return instance;
 
 }
+//**********************display card of products in the bottem of the page ****************
 
 function displayCard() {
 			$('#cardtotal').show();
@@ -41,6 +42,7 @@ function displayCard() {
 		var $total = $('<div class="total-price"><table><tr><td>subtotal</td><td>$'+ subtotal +'.00</td></tr><tr><td>Tax</td><td>35%</td></tr><tr><td>Total</td><td>$'+total+'</td></tr></table></div>');
 		$div.append($total);
 }
+///************************search the brand inside the products ***************************
 	function functionsearch(brand) {
 
 		var array = [];
@@ -52,6 +54,7 @@ function displayCard() {
 		return array;
 	}
 
+///********************show and hide the search collapse*****************************
 
 function search(brand) {
 	var array = functionsearch($('.searchinput').val());
@@ -61,18 +64,19 @@ function search(brand) {
 	$('.displaybox').hide();
 	$('#search').html('');
 
+///*****************add the products filtred with brand to the search collapse*********************
 
 	var $div = $('#search');
         var index = array.length - 1;
     while(index >= 0){
 
-    	var $element = ('<div class="col-md-4"><div style="height: 518px;" class="card mb-4 shadow-sm"><img src='+array[index]["image"]+' class="ImgGrid"> <div class="card-body"><p class="card-text">'+array[index]["brand"] +'</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" id="'+ array[index]["Id"]+ '" onclick="addToCard(this.id)"class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</button></div><small class="text-muted">'+array[index]["price"]+'</small></div></div></div></div>')
+    	var $element = ('<div class="col-md-4"><div style="height: 518px;" class="card mb-4 shadow-sm"><img src='+array[index]["image"]+' class="ImgGrid"> <div class="card-body" style="background-color: azure;"><p class="card-text" style="font-size: larger;font-family: ui-monospace;text-transform: uppercase;">'+array[index]["brand"] +'</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" id="'+ array[index]["Id"]+ '" onclick="addToCard(this.id)"class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</button></div><small class="text-muted" style="font-size: 20px;">$'+array[index]["price"]+'</small></div></div></div></div>')
     		$div.append($element);
 		index -= 1;
 	}
 }
 
-
+////********************************* add products to the card && dispay card *******************************
 
 	var card = [];
 function addToCard(Id){
@@ -89,6 +93,7 @@ function addToCard(Id){
 
 	displayCard();
 }
+///***************************** remove products from the card************************
 
 function removeFromCard(Id){
    card.splice(Id,1);
@@ -106,6 +111,7 @@ function cost(products){
 		localStorge.setItem("cost",products.price)
 	}
 }
+///*************************** sum the price of products added to the card********************
 
 function totalPrice(){
 	var total = 0;
@@ -114,7 +120,9 @@ function totalPrice(){
 	}
 	return total;
 }
-// *******************************************************************
+
+// ******************add products to the collapse with type*****************************
+
 var shoes = [];
 for (var i = 0; i < products.length; i++) {
 	if(products[i]["type"] === "shoes"){
@@ -152,6 +160,7 @@ var $div = $('.shoes');
 var $div1 = $('.tshirt');
 var $div2 = $('.jacket');
 var $div3 = $('.jeans');
+//************************add shoes to the collapse footwear*********************
     	$(document).ready(function(){
     		
     		
@@ -164,11 +173,11 @@ var $div3 = $('.jeans');
         var index = shoes.length - 1;
         while(index >= 0){
 
-        	var $element = ('<div class="col-md-4"><div style="height: 518px;" class="card mb-4 shadow-sm"><img src='+shoes[index]["image"]+' class="ImgGrid"> <div class="card-body"><p class="card-text">'+shoes[index]["brand"] +'</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" id="'+ shoes[index]["Id"]+ '" onclick="addToCard(this.id)"class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</button></div><small class="text-muted">'+shoes[index]["price"]+'</small></div></div></div></div>')
+        	var $element = ('<div class="col-md-4"><div style="height: 518px;" class="card mb-4 shadow-sm"><img src='+shoes[index]["image"]+' class="ImgGrid"> <div class="card-body" style="background-color: azure;"><p class="card-text" style="font-size: larger;font-family: ui-monospace;text-transform: uppercase;">'+shoes[index]["brand"] +'</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" id="'+ shoes[index]["Id"]+ '" onclick="addToCard(this.id)"class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</button></div><small class="text-muted" style="font-size: 20px;">$'+shoes[index]["price"]+'</small></div></div></div></div>')
         		$div.append($element);
 			index -= 1;
 		}
-           // *************tshirt**************  
+// ***************************add tshirt to the collapse t-shirt& polo***********************  
     	    		
 			for (var i = 0; i < products.length; i++) {
 				if(products[i]["type"] === "tshirt"){
@@ -179,10 +188,12 @@ var $div3 = $('.jeans');
         var index1 = tshirt.length - 1;
         while(index1 >= 0){
         	
-        	var $element2 = ('<div class="col-md-4"><div style="height: 518px;" class="card mb-4 shadow-sm"><img src='+tshirt[index1]["image"]+' class="ImgGrid"> <div class="card-body"><p class="card-text">'+tshirt[index1]["brand"] +'</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" id="'+ tshirt[index1]["Id"]+ '" onclick="addToCard(this.id)"class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</button></div><small class="text-muted">'+tshirt[index1]["price"]+'</small></div></div></div></div>')
+        	var $element2 = ('<div class="col-md-4"><div style="height: 518px;" class="card mb-4 shadow-sm"><img src='+tshirt[index1]["image"]+' class="ImgGrid"> <div class="card-body" style="background-color: azure;"><p class="card-text" style="font-size: larger;font-family: ui-monospace;text-transform: uppercase;">'+tshirt[index1]["brand"] +'</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" id="'+ tshirt[index1]["Id"]+ '" onclick="addToCard(this.id)"class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</button></div><small class="text-muted" style="font-size: 20px;">$'+tshirt[index1]["price"]+'</small></div></div></div></div>')
         		$div1.append($element2);
 			index1 -= 1;
 		}
+//*****************add jackets to the collapse jackets*************************
+
 			for (var i = 0; i < products.length; i++) {
 				if(products[i]["type"] === "jacket"){
 					jacket.push(products[i]);
@@ -193,10 +204,12 @@ var $div3 = $('.jeans');
         var index2 = jacket.length - 1;
         while(index2 >= 0){
         	
-        	var $element3 = ('<div class="col-md-4"><div style="height: 518px;" class="card mb-4 shadow-sm"><img src='+jacket[index2]["image"]+' class="ImgGrid"> <div class="card-body"><p class="card-text">'+jacket[index2]["brand"] +'</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" id="'+ jacket[index2]["Id"]+ '" onclick="addToCard(this.id)"class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</button></div><small class="text-muted">'+jacket[index2]["price"]+'</small></div></div></div></div>')
+        	var $element3 = ('<div class="col-md-4"><div style="height: 518px;" class="card mb-4 shadow-sm"><img src='+jacket[index2]["image"]+' class="ImgGrid"> <div class="card-body" style="background-color: azure;"><p class="card-text" style="font-size: larger;font-family: ui-monospace;text-transform: uppercase;">'+jacket[index2]["brand"] +'</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" id="'+ jacket[index2]["Id"]+ '" onclick="addToCard(this.id)"class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</button></div><small class="text-muted" style="font-size: 20px;">$'+jacket[index2]["price"]+'</small></div></div></div></div>')
         		$div2.append($element3);
 			index2 -= 1;
 		}
+//********************add jeans to the collapse jeans************************
+
 			for (var i = 0; i < products.length; i++) {
 				if(products[i]["type"] === "jeans"){
 					jeans.push(products[i]);
@@ -205,7 +218,7 @@ var $div3 = $('.jeans');
 			}
         var index3 = jeans.length - 1;
         while(index3 >= 0){
-        	var $element4 = ('<div class="col-md-4"><div style="height: 518px;" class="card mb-4 shadow-sm"><img src='+jeans[index3]["image"]+' class="ImgGrid"> <div class="card-body"><p class="card-text">'+jeans[index3]["brand"] +'</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" id="'+ jeans[index3]["Id"]+ '" onclick="addToCard(this.id)"class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</button></div><small class="text-muted">'+jeans[index3]["price"]+'</small></div></div></div></div>')
+        	var $element4 = ('<div class="col-md-4"><div style="height: 518px;" class="card mb-4 shadow-sm"><img src='+jeans[index3]["image"]+' class="ImgGrid"> <div class="card-body" style="background-color: azure;"><p class="card-text" style="font-size: larger;font-family: ui-monospace;text-transform: uppercase;">'+jeans[index3]["brand"] +'</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" id="'+ jeans[index3]["Id"]+ '" onclick="addToCard(this.id)"class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</button></div><small class="text-muted" style="font-size: 20px;">$'+jeans[index3]["price"]+'</small></div></div></div></div>')
         		$div3.append($element4);
 			index3 -= 1;
 		}		
@@ -214,7 +227,7 @@ var $div3 = $('.jeans');
 
 
      
-
+//********************Data of products shoes/tshirts/jackets/jeans************************************
 
 
 
